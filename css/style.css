@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --background-color: #f0f0f0;
+    --container-bg-color: #ffffff;
+    --text-color: #333333;
+    --completed-text-color: grey;
+    --button-bg-color: #007bff;
+    --button-hover-border-color: #0056b3;
+    --remove-btn-bg-color: #dc3545;
+    --edit-btn-bg-color: #17a2b8;
+    --checkbox-size: 20px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.container {
+    background-color: var(--container-bg-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.input-container {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    flex-grow: 1;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    min-width: 80px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: var(--button-bg-color);
+    color: #fff;
+    transition: background-color 0.3s, border 0.3s;
+}
+
+button:hover {
+    opacity: 0.9;
+    border-color: var(--button-hover-border-color);
+    border: 2px solid;
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 5px; 
+}
+
+.filter-name {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #555;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    padding: 10px;
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    cursor: move; 
+}
+
+li.dragging {
+    opacity: 0.5;
+}
+
+li > span {
+    flex-grow: 1;
+    text-align: left;
+    margin-right: 10px;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: var(--completed-text-color);
+}
+
+.remove-btn {
+    background-color: var(--remove-btn-bg-color);
+    color: white;
+    margin-left: 4px;
+}
+
+.edit-btn {
+    background-color: var(--edit-btn-bg-color);
+    color: white;
+}
+
+input[type="checkbox"] {
+    flex-shrink: 0;
+    margin-top: 5px;
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
+    margin-right: 10px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+        max-width: 90%;
+    }
+}
