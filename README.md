@@ -1,5 +1,7 @@
 # Desafio: TODO list
 
+## [Deploy in Vercel](https://to-do-list-ebon-pi-13.vercel.app/)
+
 ## Visão Geral
 
 Este é um aplicativo simples de Lista de Tarefas construído usando HTML, CSS e JavaScript. O aplicativo permite que os usuários adicionem, editem, removam e filtrem tarefas. As tarefas são armazenadas no armazenamento local do navegador, para que persistam mesmo após a página ser atualizada.
