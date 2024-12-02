@@ -37,14 +37,3 @@ Este é um aplicativo simples de Lista de Tarefas construído usando HTML, CSS e
   - Para funcionalidade de arrastar e soltar para reordenar tarefas.
 
 Este projeto de Lista de Tarefas demonstra o uso de tecnologias web básicas para criar um aplicativo funcional e interativo. Ele fornece uma boa base para entender como construir aplicativos web com armazenamento de dados persistente.
-
-
-# Falando sobre mim e o Desafio
-
-- Meu nome é Nicolas Rosa, sou graduando de Computação na Unicamp
-- Fui Presidente da Atlética da Computação Unicamp (AAACEC) 
-- Sou estagiário de Software Engineer na empresa John Deere
-- Trabalho numa equipe de TI com SAP na parte de SD (Sales & Distribution), onde implementamos projetos em ABAP (Linguagem de desenvolvimento do SAP) e damos suporte a qualquer erro que ocorre no sistema da empresa.
-- Admito que não tive muito desenvolvimento em HTML, CSS e JS na empresa (Principalmente React e Node), onde a mais de 1 ano trabalho com o SAP.
-- Tive alguns bloqueios por conta de limitações ao usar o computador da empresa onde eu não tenho Docker instalado e recebi alguns bloqueios para configuração do backend e do banco de dados, por isso não implementei (Não vou mentir, não tinha tanto conhecimento neles, mas estou apto a aprender e me desenvolver no que for necessário).
-- No fim a Lista de Tarefas foi implemetada da maneira mais simples possível, sei que isso impacta a análise nesse processo seletivo, mas estou entregando ele pois no momento não posso mais continuar trabalhando nele, não me certifiquei de saber que eram 24h de desenvolvimento antes de aceitar participar do processo seletivo, mas independente do resultado muito obrigado pela oportunidade!!!

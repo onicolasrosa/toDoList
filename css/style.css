@@ -1,5 +1,7 @@
+/* Import the Poppins font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+/* CSS variables for colors and sizes */
 :root {
     --background-color: #f0f0f0;
     --container-bg-color: #ffffff;
@@ -12,6 +14,7 @@
     --checkbox-size: 20px;
 }
 
+/* Reset margins and paddings, and set font */
 * {
     margin: 0;
     padding: 0;
@@ -19,6 +22,7 @@
     font-family: 'Poppins', sans-serif;
 }
 
+/* Body styling */
 body {
     margin: 0;
     padding: 0;
@@ -30,6 +34,7 @@ body {
     color: var(--text-color);
 }
 
+/* Main container styling */
 .container {
     background-color: var(--container-bg-color);
     padding: 20px;
@@ -41,11 +46,13 @@ body {
     margin-top: 20px;
 }
 
+/* Input container styling */
 .input-container {
     display: flex;
     margin-bottom: 20px;
 }
 
+/* Text input styling */
 input[type="text"] {
     padding: 10px;
     flex-grow: 1;
@@ -54,6 +61,7 @@ input[type="text"] {
     border-radius: 4px;
 }
 
+/* Button styling */
 button {
     padding: 10px;
     min-width: 80px;
@@ -65,12 +73,14 @@ button {
     transition: background-color 0.3s, border 0.3s;
 }
 
+/* Button hover styling */
 button:hover {
     opacity: 0.9;
     border-color: var(--button-hover-border-color);
     border: 2px solid;
 }
 
+/* Filter buttons styling */
 .filter-buttons {
     display: flex;
     justify-content: center; 
@@ -79,18 +89,21 @@ button:hover {
     gap: 5px; 
 }
 
+/* Filter name styling */
 .filter-name {
     margin-bottom: 20px;
     font-weight: bold;
     color: #555;
 }
 
+/* Task list styling */
 ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
+/* Task list item styling */
 li {
     padding: 10px;
     background-color: #f9f9f9;
@@ -102,10 +115,12 @@ li {
     cursor: move; 
 }
 
+/* Styling for list item during drag */
 li.dragging {
     opacity: 0.5;
 }
 
+/* Task text styling */
 li > span {
     flex-grow: 1;
     text-align: left;
@@ -114,22 +129,26 @@ li > span {
     white-space: normal;
 }
 
+/* Completed task styling */
 .completed {
     text-decoration: line-through;
     color: var(--completed-text-color);
 }
 
+/* Remove button styling */
 .remove-btn {
     background-color: var(--remove-btn-bg-color);
     color: white;
     margin-left: 4px;
 }
 
+/* Edit button styling */
 .edit-btn {
     background-color: var(--edit-btn-bg-color);
     color: white;
 }
 
+/* Checkbox styling */
 input[type="checkbox"] {
     flex-shrink: 0;
     margin-top: 5px;
@@ -138,6 +157,7 @@ input[type="checkbox"] {
     margin-right: 10px;
 }
 
+/* Responsive styling for smaller screens */
 @media (max-width: 600px) {
     .container {
         padding: 15px;
