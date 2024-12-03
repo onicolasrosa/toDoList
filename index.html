@@ -20,11 +20,17 @@
         <button id="addTaskBtn">Add</button>
     </div>
 
-    <div class="filter-buttons">
-        <!-- Buttons to filter tasks -->
-        <button id="showAllBtn">Show All</button>
-        <button id="showPendingBtn">Show Pending</button>
-        <button id="showCompletedBtn">Show Completed</button>
+    <!-- Filter section with dropdown button and filter name -->
+    <div class="filter-section">
+        <span id="filterName" class="filter-name">All Tasks</span> <!-- Initial filter name -->
+        <div class="filter-dropdown">
+            <button id="filterBtn"><i class="fas fa-list"></i></button>
+            <div id="dropdownContent" class="dropdown-content">
+                <a href="#" data-filter="all">Show All</a>
+                <a href="#" data-filter="pending">Show Pending</a>
+                <a href="#" data-filter="completed">Show Completed</a>
+            </div>
+        </div>
     </div>
 
     <!-- Displays the active filter name -->

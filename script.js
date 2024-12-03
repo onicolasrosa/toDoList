@@ -1,12 +1,18 @@
-// Add click event listener to the "Add" button to trigger the addTask function
+// AI-Assisted
+
+// Add click event to the add task button
 document.getElementById('addTaskBtn').addEventListener('click', addTask);
 
-// Add click event listeners to filter buttons to set the active filter
-document.getElementById('showAllBtn').addEventListener('click', () => setActiveFilter('all'));
-document.getElementById('showPendingBtn').addEventListener('click', () => setActiveFilter('pending'));
-document.getElementById('showCompletedBtn').addEventListener('click', () => setActiveFilter('completed'));
+// Add click event to each dropdown link to set the active filter
+document.querySelectorAll('.dropdown-content a').forEach(link => {
+    link.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default anchor behavior
+        const filter = this.getAttribute('data-filter'); // Get the filter type from data attribute
+        setActiveFilter(filter); // Set the active filter
+    });
+});
 
-// Add keypress event listener to the input field to add a task when "Enter" is pressed
+// Add keypress event to the input field to add task on "Enter" key
 document.getElementById('taskInput').addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
         addTask(); // Call addTask function when Enter key is pressed
@@ -43,26 +49,18 @@ function addTask() {
 
 // Set the active filter and update the task display accordingly
 function setActiveFilter(filter) {
-    // Remove 'active' class from all filter buttons
-    document.querySelectorAll('.filter-buttons button').forEach(button => {
-        button.classList.remove('active');
-    });
-
     const filterName = document.getElementById('filterName'); // Get the filter name display element
     const tasks = getTasks(); // Retrieve tasks from local storage
     const totalTasks = tasks.length; // Calculate total number of tasks
     const pendingTasks = tasks.filter(task => !task.completed).length; // Calculate number of pending tasks
     const completedTasks = tasks.filter(task => task.completed).length; // Calculate number of completed tasks
 
-    // Update the filter name and set the active button based on the selected filter
+    // Update the filter name based on the selected filter
     if (filter === 'all') {
-        document.getElementById('showAllBtn').classList.add('active');
         filterName.textContent = `All Tasks: ${totalTasks}`;
     } else if (filter === 'pending') {
-        document.getElementById('showPendingBtn').classList.add('active');
         filterName.textContent = `Pending Tasks: ${pendingTasks}`;
     } else if (filter === 'completed') {
-        document.getElementById('showCompletedBtn').classList.add('active');
         filterName.textContent = `Completed Tasks: ${completedTasks}`;
     }
     renderTasks(filter); // Render tasks based on the active filter
