@@ -37,7 +37,12 @@ function addTask() {
 
     if (taskText !== '') { // Check if the input is not empty
         const tasks = getTasks(); // Get current tasks from local storage
-        const newTask = { id: Date.now(), task: taskText, completed: false }; // Create a new task object
+        const newTask = {
+            id: Date.now(),
+            task: taskText,
+            completed: false,
+            createdAt: new Date().toLocaleString() // Store the creation date
+        };
         tasks.push(newTask); // Add the new task to the tasks array
         saveTasks(tasks); // Save updated tasks array to local storage
         setActiveFilter('all'); // Refresh the task list to show all tasks
@@ -118,6 +123,12 @@ function renderTasks(filter) {
         taskText.contentEditable = false; // Make the task text non-editable by default
         li.appendChild(taskText); // Append the task text to the list item
 
+        // Create a span element for the creation date
+        const taskDate = document.createElement('span');
+        taskDate.textContent = `Created on: ${task.createdAt}`; // Display the creation date
+        taskDate.className = 'task-date'; // Add a class for styling
+        li.appendChild(taskDate); // Append the creation date to the list item
+
         // Create a checkbox to mark the task as completed
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox'; // Set the input type to checkbox
@@ -183,7 +194,8 @@ function saveTasksOrder() {
     const tasks = Array.from(taskList.children).map(li => {
         const taskText = li.querySelector('span').textContent; // Get task text
         const completed = li.querySelector('input[type="checkbox"]').checked; // Get task completion status
-        return { task: taskText, completed }; // Return task object
+        const createdAt = li.querySelector('.task-date').textContent.replace('Created on: ', ''); // Get creation date
+        return { task: taskText, completed, createdAt }; // Return task object
     });
     saveTasks(tasks); // Save the reordered tasks to local storage
 }

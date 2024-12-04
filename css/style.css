@@ -130,6 +130,13 @@ li > span {
     border-radius: 4px;
 }
 
+/* Styling for the creation date */
+.task-date {
+    font-size: 0.8em;
+    color: #888;
+    margin-left: 10px;
+}
+
 /* Remove button styling */
 .remove-btn {
     background-color: var(--remove-btn-bg-color);
