@@ -1,39 +1,38 @@
-# Desafio: TODO list
+# Challenge: TODO List
 
-## [Deploy in Vercel](https://to-do-list-ebon-pi-13.vercel.app/)
+## [Deploy on Vercel](https://to-do-list-ebon-pi-13.vercel.app/)
 
-## Visão Geral
+## Overview
 
-Este é um aplicativo simples de Lista de Tarefas construído usando HTML, CSS e JavaScript. O aplicativo permite que os usuários adicionem, editem, removam e filtrem tarefas. As tarefas são armazenadas no armazenamento local do navegador, para que persistam mesmo após a página ser atualizada.
+This is a simple Todo List application built using HTML, CSS, and JavaScript. The application allows users to add, edit, remove, and filter tasks. Tasks are stored in the browser's local storage, so they persist even after the page is refreshed.
 
-## Funcionalidades
+## Features
 
-- Adicionar novas tarefas à lista.
-- Marcar tarefas como concluídas.
-- Editar tarefas existentes.
-- Remover tarefas da lista.
-- Filtrar tarefas para mostrar todas, pendentes ou concluídas.
-- Arrastar e soltar para reordenar tarefas.
-- As tarefas são salvas no armazenamento local.
+- Add new tasks to the list.
+- Mark tasks as completed.
+- Edit existing tasks.
+- Remove tasks from the list.
+- Filter tasks to show all, pending, or completed tasks.
+- Drag and drop to reorder tasks.
+- Tasks are saved in local storage.
 
-## Tecnologias Utilizadas
+## Technologies Used
 
-- HTML para a estrutura do aplicativo.
-- CSS para estilização e layout.
-- JavaScript para interatividade e funcionalidade.
+- HTML for the structure of the application.
+- CSS for styling and layout.
+- JavaScript for interactivity and functionality.
 
+## A bit about the project's JavaScript (script.js)
 
-## Um pouco sobre o JavaScript do projeto (script.js)
+- **Key Functions**:
+  - `getTasks` and `saveTasks`: Handle retrieving and storing tasks in local storage.
+  - `addTask`: Adds a new task to the list and updates local storage.
+  - `setActiveFilter`: Updates the task list based on the selected filter (all, pending, completed).
+  - `renderTasks`: Renders tasks on the page according to the current filter.
+  - `saveTasksOrder`: Saves the order of tasks after they have been reordered via drag-and-drop.
+- **Event Listeners**:
+  - For button clicks to add tasks and apply filters.
+  - For the input field to add tasks when the "Enter" key is pressed.
+  - For drag-and-drop functionality to reorder tasks.
 
-- **Funções Principais**:
-  - `getTasks` e `saveTasks`: Lidam com a recuperação e o armazenamento de tarefas no armazenamento local.
-  - `addTask`: Adiciona uma nova tarefa à lista e atualiza o armazenamento local.
-  - `setActiveFilter`: Atualiza a lista de tarefas com base no filtro selecionado (todas, pendentes, concluídas).
-  - `renderTasks`: Renderiza as tarefas na página de acordo com o filtro atual.
-  - `saveTasksOrder`: Salva a ordem das tarefas após serem reordenadas via arrastar e soltar.
-- **Event Listeners**: 
-  - Para cliques em botões para adicionar tarefas e aplicar filtros.
-  - Para o campo de entrada adicionar tarefas quando a tecla "Enter" é pressionada.
-  - Para funcionalidade de arrastar e soltar para reordenar tarefas.
-
-Este projeto de Lista de Tarefas demonstra o uso de tecnologias web básicas para criar um aplicativo funcional e interativo. Ele fornece uma boa base para entender como construir aplicativos web com armazenamento de dados persistente.
+This Todo List project demonstrates the use of basic web technologies to create a functional and interactive application. It provides a good foundation for understanding how to build web applications with persistent data storage.
