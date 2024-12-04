@@ -199,6 +199,14 @@ input[type="checkbox"] {
     display: block; /* Show dropdown on hover */
 }
 
+/* Style for the editable text field */
+.editable {
+    border: 1px dashed #ccc;
+    background-color: #f9f9f9;
+    padding: 5px;
+    border-radius: 4px;
+}
+
 /* Responsive styling for smaller screens */
 @media (max-width: 600px) {
     .container {

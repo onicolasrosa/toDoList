@@ -1,5 +1,3 @@
-// AI-Assisted
-
 // Add click event to the add task button
 document.getElementById('addTaskBtn').addEventListener('click', addTask);
 
@@ -117,6 +115,7 @@ function renderTasks(filter) {
         const taskText = document.createElement('span');
         taskText.textContent = task.task; // Set the text content to the task description
         taskText.className = task.completed ? 'completed' : ''; // Add completed class if task is completed
+        taskText.contentEditable = false; // Make the task text non-editable by default
         li.appendChild(taskText); // Append the task text to the list item
 
         // Create a checkbox to mark the task as completed
@@ -135,13 +134,26 @@ function renderTasks(filter) {
         const editBtn = document.createElement('button');
         editBtn.textContent = 'Edit'; // Set button text
         editBtn.className = 'edit-btn'; // Add class for styling
-        // Add click event listener to edit the task
+        // Add click event listener to enable inline editing
         editBtn.addEventListener('click', function() {
-            const newTaskText = prompt('Edit task:', task.task); // Prompt user for new task text
-            if (newTaskText !== null && newTaskText.trim() !== '') {
-                task.task = newTaskText.trim(); // Update task text
+            taskText.contentEditable = true; // Make the task text editable
+            taskText.classList.add('editable'); // Add editable styling
+            taskText.focus(); // Focus on the task text for editing
+        });
+
+        // Add keydown event listener to handle Enter and Esc keys
+        taskText.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent default Enter key behavior
+                task.task = taskText.textContent.trim(); // Update task text
+                taskText.contentEditable = false; // Disable editing
+                taskText.classList.remove('editable'); // Remove editable styling
                 saveTasks(tasks); // Save updated tasks to local storage
-                renderTasks(filter); // Re-render tasks with the current filter
+            } else if (event.key === 'Escape') {
+                event.preventDefault(); // Prevent default Esc key behavior
+                taskText.textContent = task.task; // Revert to original task text
+                taskText.contentEditable = false; // Disable editing
+                taskText.classList.remove('editable'); // Remove editable styling
             }
         });
 
