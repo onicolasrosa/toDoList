@@ -64,13 +64,16 @@ input[type="text"] {
 /* Button styling */
 button {
     padding: 10px;
-    min-width: 80px;
+    min-width: 40px; /* Adjusted width for icon buttons */
     border: 2px solid transparent;
     border-radius: 4px;
     cursor: pointer;
     background-color: var(--button-bg-color);
     color: #fff;
     transition: background-color 0.3s, border 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Button hover styling */
@@ -117,6 +120,14 @@ li > span {
 .completed {
     text-decoration: line-through;
     color: var(--completed-text-color);
+}
+
+/* Editable text styling */
+.editable {
+    border: 1px dashed #ccc;
+    background-color: #f9f9f9;
+    padding: 5px;
+    border-radius: 4px;
 }
 
 /* Remove button styling */
@@ -197,14 +208,6 @@ input[type="checkbox"] {
 
 .filter-dropdown:hover .dropdown-content {
     display: block; /* Show dropdown on hover */
-}
-
-/* Style for the editable text field */
-.editable {
-    border: 1px dashed #ccc;
-    background-color: #f9f9f9;
-    padding: 5px;
-    border-radius: 4px;
 }
 
 /* Responsive styling for smaller screens */

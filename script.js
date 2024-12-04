@@ -130,9 +130,9 @@ function renderTasks(filter) {
         });
         li.insertBefore(checkbox, taskText); // Insert the checkbox before the task text
 
-        // Create an edit button to modify the task
+        // Create an edit button with a pencil icon
         const editBtn = document.createElement('button');
-        editBtn.textContent = 'Edit'; // Set button text
+        editBtn.innerHTML = '<i class="fas fa-pencil-alt"></i>'; // Use Font Awesome pencil icon
         editBtn.className = 'edit-btn'; // Add class for styling
         // Add click event listener to enable inline editing
         editBtn.addEventListener('click', function() {
@@ -157,9 +157,9 @@ function renderTasks(filter) {
             }
         });
 
-        // Create a remove button to delete the task
+        // Create a remove button with an X icon
         const removeBtn = document.createElement('button');
-        removeBtn.textContent = 'Remove'; // Set button text
+        removeBtn.innerHTML = '<i class="fas fa-times"></i>'; // Use Font Awesome X icon
         removeBtn.className = 'remove-btn'; // Add class for styling
         // Add click event listener to remove the task
         removeBtn.addEventListener('click', function() {
