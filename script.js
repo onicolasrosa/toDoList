@@ -37,7 +37,14 @@ function addTask() {
 
     if (taskText !== '') { // Check if the input is not empty
         const tasks = getTasks(); // Get current tasks from local storage
-        const newTask = { id: Date.now(), task: taskText, completed: false }; // Create a new task object
+        const now = new Date();
+        const newTask = {
+            id: Date.now(), // Unique identifier for the task
+            task: taskText, // Task description
+            completed: false, // Task completion status
+            createdAt: now.toLocaleDateString(), // Store the creation date
+            createdTime: now.toLocaleTimeString() // Store the creation time
+        };
         tasks.push(newTask); // Add the new task to the tasks array
         saveTasks(tasks); // Save updated tasks array to local storage
         setActiveFilter('all'); // Refresh the task list to show all tasks
@@ -118,6 +125,17 @@ function renderTasks(filter) {
         taskText.contentEditable = false; // Make the task text non-editable by default
         li.appendChild(taskText); // Append the task text to the list item
 
+        // Create a button for showing more information
+        const infoBtn = document.createElement('button');
+        infoBtn.innerHTML = '<i class="fas fa-book"></i>'; // Use Font Awesome book icon
+        infoBtn.className = 'info-btn'; // Add class for styling
+        // Add click event listener to show task information
+        infoBtn.addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevent the event from bubbling up
+            showTaskInfo(task, infoBtn); // Call function to show task info
+        });
+        li.appendChild(infoBtn); // Append the info button to the list item
+
         // Create a checkbox to mark the task as completed
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox'; // Set the input type to checkbox
@@ -176,6 +194,39 @@ function renderTasks(filter) {
     });
 }
 
+// Function to show task information in a popup
+function showTaskInfo(task, button) {
+    // Create a div for the info window
+    const infoWindow = document.createElement('div');
+    infoWindow.className = 'info-window'; // Add class for styling
+
+    // Add task name and creation date/time to the info window
+    const taskName = document.createElement('p');
+    taskName.innerHTML = `<span class="label">Task:</span> ${task.task}`; // Use bold label
+    const taskCreated = document.createElement('p');
+    taskCreated.innerHTML = `<span class="label">Created on:</span> ${task.createdAt} at ${task.createdTime}`; // Use bold label
+
+    infoWindow.appendChild(taskName);
+    infoWindow.appendChild(taskCreated);
+
+    // Append the info window to the body
+    document.body.appendChild(infoWindow);
+
+    // Position the info window near the button
+    const rect = button.getBoundingClientRect();
+    infoWindow.style.top = `${rect.bottom + window.scrollY}px`;
+    infoWindow.style.left = `${rect.left + window.scrollX}px`;
+    infoWindow.style.display = 'block';
+
+    // Close the info window when clicking outside
+    document.addEventListener('click', function closeInfoWindow(e) {
+        if (!infoWindow.contains(e.target) && e.target !== button) {
+            infoWindow.remove(); // Remove the info window when clicking outside
+            document.removeEventListener('click', closeInfoWindow);
+        }
+    });
+}
+
 // Function to save the order of tasks after reordering
 function saveTasksOrder() {
     const taskList = document.getElementById('taskList'); // Get the task list element
@@ -183,7 +234,9 @@ function saveTasksOrder() {
     const tasks = Array.from(taskList.children).map(li => {
         const taskText = li.querySelector('span').textContent; // Get task text
         const completed = li.querySelector('input[type="checkbox"]').checked; // Get task completion status
-        return { task: taskText, completed }; // Return task object
+        const createdAt = li.querySelector('.task-date span:first-child').textContent.replace('Created on: ', ''); // Get creation date
+        const createdTime = li.querySelector('.task-date span:last-child').textContent; // Get creation time
+        return { task: taskText, completed, createdAt, createdTime }; // Return task object
     });
     saveTasks(tasks); // Save the reordered tasks to local storage
 }
