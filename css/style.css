@@ -61,10 +61,10 @@ input[type="text"] {
     border-radius: 4px;
 }
 
-/* Button styling */
+/* General button styling */
 button {
     padding: 10px;
-    min-width: 40px; /* Adjusted width for icon buttons */
+    min-width: 40px;
     border: 2px solid transparent;
     border-radius: 4px;
     cursor: pointer;
@@ -74,6 +74,30 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 40px;
+}
+
+/* Sort button styling */
+.sort-btn {
+    background-color: #6c757d; /* A neutral color for sorting */
+    margin-right: 4px;
+}
+
+/* Info button styling */
+.info-btn {
+    background-color: orange; /* Use a shade of orange that complements the project */
+    margin-right: 4px;
+}
+
+/* Edit button styling */
+.edit-btn {
+    background-color: var(--edit-btn-bg-color);
+}
+
+/* Remove button styling */
+.remove-btn {
+    background-color: var(--remove-btn-bg-color);
+    margin-left: 4px;
 }
 
 /* Button hover styling */
@@ -99,12 +123,6 @@ li {
     justify-content: space-between;
     align-items: center;
     border-radius: 4px;
-    cursor: move; 
-}
-
-/* Styling for list item during drag */
-li.dragging {
-    opacity: 0.5;
 }
 
 /* Task text styling */
@@ -130,17 +148,24 @@ li > span {
     border-radius: 4px;
 }
 
-/* Remove button styling */
-.remove-btn {
-    background-color: var(--remove-btn-bg-color);
-    color: white;
-    margin-left: 4px;
+/* Info window styling */
+.info-window {
+    position: absolute;
+    background-color: var(--container-bg-color);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: none; /* Hidden by default */
 }
 
-/* Edit button styling */
-.edit-btn {
-    background-color: var(--edit-btn-bg-color);
-    color: white;
+.info-window p {
+    margin: 5px 0;
+}
+
+.info-window .label {
+    font-weight: bold; /* Make labels bold */
 }
 
 /* Checkbox styling */
@@ -209,43 +234,6 @@ input[type="checkbox"] {
 .filter-dropdown:hover .dropdown-content {
     display: block; /* Show dropdown on hover */
 }
-
-/* Info button styling */
-.info-btn {
-    background-color: orange; /* Use a shade of orange that complements the project */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 10px; /* Match the padding with other buttons */
-    min-width: 40px; /* Ensure consistent width */
-    cursor: pointer;
-    margin-right: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 36px; /* Match the height with other buttons */
-}
-
-/* Info window styling */
-.info-window {
-    position: absolute;
-    background-color: var(--container-bg-color);
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    display: none; /* Hidden by default */
-}
-
-.info-window p {
-    margin: 5px 0;
-}
-
-.info-window .label {
-    font-weight: bold; /* Make labels bold */
-}
-
 
 /* Responsive styling for smaller screens */
 @media (max-width: 600px) {

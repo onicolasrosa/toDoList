@@ -17,8 +17,11 @@ document.getElementById('taskInput').addEventListener('keypress', function(event
     }
 });
 
-// Variable to store the currently dragged item for drag-and-drop functionality
-let draggedItem = null;
+// Variable to store the current filter
+let currentFilter = 'all';
+
+// Variable to store the current sort order
+let sortAscending = true;
 
 // Retrieve tasks from local storage, or return an empty array if none exist
 function getTasks() {
@@ -45,15 +48,16 @@ function addTask() {
             createdAt: now.toLocaleDateString(), // Store the creation date
             createdTime: now.toLocaleTimeString() // Store the creation time
         };
-        tasks.push(newTask); // Add the new task to the tasks array
+        tasks.push(newTask); // Add the new task to the end of the tasks array
         saveTasks(tasks); // Save updated tasks array to local storage
-        setActiveFilter('all'); // Refresh the task list to show all tasks
+        setActiveFilter(currentFilter); // Update the task list and counter with the current filter
         taskInput.value = ''; // Clear the input field
     }
 }
 
 // Set the active filter and update the task display accordingly
 function setActiveFilter(filter) {
+    currentFilter = filter; // Update the current filter
     const filterName = document.getElementById('filterName'); // Get the filter name display element
     const tasks = getTasks(); // Retrieve tasks from local storage
     const totalTasks = tasks.length; // Calculate total number of tasks
@@ -71,7 +75,7 @@ function setActiveFilter(filter) {
     renderTasks(filter); // Render tasks based on the active filter
 }
 
-// Render tasks on the screen based on the selected filter
+// Render tasks on the screen based on the selected filter and sort order
 function renderTasks(filter) {
     const tasks = getTasks(); // Retrieve tasks from local storage
     // Filter tasks based on the active filter
@@ -81,42 +85,19 @@ function renderTasks(filter) {
         return true; // Return all tasks if filter is 'all'
     });
 
+    // Sort tasks based on the creation date and time
+    filteredTasks.sort((a, b) => {
+        const dateA = new Date(`${a.createdAt} ${a.createdTime}`);
+        const dateB = new Date(`${b.createdAt} ${b.createdTime}`);
+        return sortAscending ? dateA - dateB : dateB - dateA;
+    });
+
     const taskList = document.getElementById('taskList'); // Get the task list element
     taskList.innerHTML = ''; // Clear the current task list
 
-    // Iterate over each filtered task and create list items
+    // Iterate over each filtered and sorted task and create list items
     filteredTasks.forEach(task => {
         const li = document.createElement('li'); // Create a list item element
-        li.setAttribute('draggable', true); // Make the list item draggable
-
-        // Add dragstart event listener to handle the start of dragging
-        li.addEventListener('dragstart', function() {
-            draggedItem = li; // Set the dragged item
-            setTimeout(() => li.classList.add('dragging'), 0); // Add dragging class after a short delay
-        });
-
-        // Add dragend event listener to handle the end of dragging
-        li.addEventListener('dragend', function() {
-            setTimeout(() => li.classList.remove('dragging'), 0); // Remove dragging class after a short delay
-            draggedItem = null; // Clear the dragged item
-            saveTasksOrder(); // Save the new order of tasks
-        });
-
-        // Add dragover event listener to allow dropping of dragged items
-        li.addEventListener('dragover', function(e) {
-            e.preventDefault(); // Prevent default behavior to allow drop
-            const draggingElement = document.querySelector('.dragging'); // Get the currently dragging element
-            if (draggingElement && draggingElement !== li) {
-                const bounding = li.getBoundingClientRect(); // Get bounding rectangle of the list item
-                const offset = bounding.y + (bounding.height / 2); // Calculate the midpoint of the list item
-                // Insert the dragging element before or after the current list item based on mouse position
-                if (e.clientY - offset > 0) {
-                    li.parentNode.insertBefore(draggingElement, li.nextSibling);
-                } else {
-                    li.parentNode.insertBefore(draggingElement, li);
-                }
-            }
-        });
 
         // Create a span element for the task text
         const taskText = document.createElement('span');
@@ -153,7 +134,7 @@ function renderTasks(filter) {
         editBtn.innerHTML = '<i class="fas fa-pencil-alt"></i>'; // Use Font Awesome pencil icon
         editBtn.className = 'edit-btn'; // Add class for styling
         // Add click event listener to enable inline editing
-        editBtn.addEventListener('click', function() {
+        editBtn.addEventListener('click', function() { 
             taskText.contentEditable = true; // Make the task text editable
             taskText.classList.add('editable'); // Add editable styling
             taskText.focus(); // Focus on the task text for editing
@@ -227,19 +208,15 @@ function showTaskInfo(task, button) {
     });
 }
 
-// Function to save the order of tasks after reordering
-function saveTasksOrder() {
-    const taskList = document.getElementById('taskList'); // Get the task list element
-    // Map the list items to an array of task objects
-    const tasks = Array.from(taskList.children).map(li => {
-        const taskText = li.querySelector('span').textContent; // Get task text
-        const completed = li.querySelector('input[type="checkbox"]').checked; // Get task completion status
-        const createdAt = li.querySelector('.task-date span:first-child').textContent.replace('Created on: ', ''); // Get creation date
-        const createdTime = li.querySelector('.task-date span:last-child').textContent; // Get creation time
-        return { task: taskText, completed, createdAt, createdTime }; // Return task object
-    });
-    saveTasks(tasks); // Save the reordered tasks to local storage
+// Function to toggle the sort order and re-render tasks
+function toggleSortOrder() {
+    sortAscending = !sortAscending; // Toggle the sort order
+    renderTasks(currentFilter); // Re-render tasks with the new sort order
 }
 
-// Initial rendering of tasks with the 'all' filter
-setActiveFilter('all'); // Set the default filter to 'all' and render tasks
+// Create and append the sort button
+const sortBtn = document.createElement('button');
+sortBtn.innerHTML = '<i class="fas fa-sort"></i>'; // Use Font Awesome sort icon
+sortBtn.className = 'sort-btn'; // Add class for styling
+sortBtn.addEventListener('click', toggleSortOrder); // Add click event to toggle sort order
+document.querySelector('.filter-section').insertBefore(sortBtn, document.querySelector('.filter-dropdown'));
